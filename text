@@ -1,0 +1,46 @@
+ Project Idea: "DevTasks" – Developer Task Manager
+A task management web app where users can:
+
+View a list of tasks by project
+
+Create/update/delete tasks
+
+Toggle between completed and pending
+
+Navigate between pages using React Router
+
+Manage global state (like current user or task list) via Context API
+
+🛠️ Core Tech Stack
+React (JS)
+
+React Router DOM
+
+Context API + useReducer
+
+Hooks: useState, useEffect, useContext, useReducer
+
+🧩 Pages/Routes
+/ – Home / Welcome
+
+/projects – List of projects
+
+/projects/:id – Task list for a specific project
+
+/add-task – Add a new task
+
+* – 404 page
+
+📦 Components
+Navbar – shows nav links, active route
+
+ProjectList – shows list of projects
+
+TaskList – shows tasks per project
+
+TaskItem – checkbox + title + delete/edit
+
+AddTaskForm – form to add new task
+
+Loader / Error components – for feedback
+
