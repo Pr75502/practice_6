@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />   
         <Route path="/form" element={<Form />} />  
-        <Route path="/edit_task/:id" element={<Form />} />  
+        <Route path="/form/:id" element={<Form />} />  
         <Route path="/projects" element={<Projects />} /> 
         <Route path="/projects/:id" element={<ProjectDetails />} /> 
         <Route path="/notFound" element={<NotFound />} />  

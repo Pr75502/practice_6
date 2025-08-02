@@ -6,8 +6,7 @@ const Navbar = () => {
             <Link to="/" className="text-white mr-4">Home</Link> |{"  "}
             <Link to="/form" className="text-white mr-4">Add Project</Link> |{"  "}
             <Link to="/projects" className="text-white mr-4">Projects</Link> |{"  "}
-            <Link to="/projectsDetails" className="text-white mr-4">Project Details</Link> |{"  "}
-
+         
         </div>
     )
 }

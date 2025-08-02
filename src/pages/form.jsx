@@ -1,46 +1,42 @@
-import { useRef, useEffect, useState } from "react";
-import { add, update } from "../context/actions";
-import useAuth from "../context/contextCreator";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addProject, updateProject } from "../redux/projectSlice";
 
 const Form = () => {
-    const taskRef = useRef();
-    const { state, dispatch } = useAuth();
-    const { id } = useParams()
-
+    const { id } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const projects = useSelector((state) => state.projects.projects);
 
-    
-    const [currentTaskText, setCurrentTaskText] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
-    const projectToEdit = id ? state.find(item => item.id === +id) : null;
-    
+    const projectToEdit = id ? projects.find(item => item.id === +id) : null;
 
-  
     useEffect(() => {
         if (projectToEdit) {
-            setCurrentTaskText(projectToEdit.task)
+            setTitle(projectToEdit.name);
+            setDescription(projectToEdit.description);
         } else {
-            setCurrentTaskText('');
+            setTitle('');
+            setDescription('');
         }
-    }, [projectToEdit]); 
+    }, [projectToEdit]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newTaskText = taskRef.current.value;
 
         if (id && projectToEdit) {
-            
-            dispatch(update({ ...projectToEdit, task: newTaskText }));
+            dispatch(updateProject({ ...projectToEdit, name: title, description: description }));
         } else {
-           
             const newId = Date.now();
-            dispatch(add({ id: newId, task: newTaskText, status: false }));
+            dispatch(addProject({ id: newId, name: title, description: description }));
         }
 
-        taskRef.current.value = ''
-        setCurrentTaskText(''); 
-        navigate("/projects")
+        setTitle('');
+        setDescription('');
+        navigate("/projects");
     };
 
     return (
@@ -48,14 +44,20 @@ const Form = () => {
             <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-md mx-auto">
                 <input
                     type="text"
-                    placeholder={id ? "Edit Task" : "Add Task"}
-                    ref={taskRef}
-                    value={currentTaskText}
-                    onChange={(e) => setCurrentTaskText(e.target.value)} 
+                    placeholder={id ? "Edit Project Title" : "Project Title"}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     className="border rounded-md py-2 px-4 mb-4"
+                    required
                 />
+                <textarea
+                    placeholder={id ? "Edit Project Description" : "Project Description"}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="border rounded-md py-2 px-4 mb-4 h-24"
+                ></textarea>
                 <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
-                    {id ? "Update Task" : "Add Task"}
+                    {id ? "Update Project" : "Add Project"}
                 </button>
             </form>
         </div>

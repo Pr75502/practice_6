@@ -1,10 +1,7 @@
+import { useSelector } from 'react-redux';
+
 const ProjectList = () => {
-    // Sample project data
-    const projects = [
-        { id: 1, name: 'Project A', description: 'A brief description of Project A.' },
-        { id: 2, name: 'Project B', description: 'A brief description of Project B.' },
-        { id: 3, name: 'Project C', description: 'A brief description of Project C.' },
-    ];
+    const projects = useSelector((state) => state.projects.projects);
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">

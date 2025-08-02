@@ -1,12 +1,8 @@
+import { useSelector } from 'react-redux';
 import TaskItem from './taskItem';
 
 const TaskList = () => {
-    // Sample task data
-    const tasks = [
-        { id: 1, name: 'Task 1' },
-        { id: 2, name: 'Task 2' },
-        { id: 3, name: 'Task 3' },
-    ];
+    const tasks = useSelector((state) => state.tasks.tasks);
 
     return (
         <div className="mt-4">
